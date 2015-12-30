@@ -1,0 +1,39 @@
+{
+  "name": "hawker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szwang/hawker.git"
+  },
+  "author": "szwang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/szwang/hawker/issues"
+  },
+  "homepage": "https://github.com/szwang/hawker#readme",
+  "devDependencies": {
+    "babel-cli": "^6.3.17",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.3.13",
+    "gulp": "^3.9.0",
+    "webpack": "^1.12.9",
+    "webpack-dev-middleware": "^1.4.0",
+    "webpack-hot-middleware": "^2.6.0"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.3.19",
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "flux": "^2.1.1",
+    "path": "^0.12.7",
+    "react": "^0.14.5",
+    "react-dom": "^0.14.5"
+  }
+}
