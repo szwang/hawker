@@ -2,7 +2,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 // import auth from '../utils/auth'
-import NavBar from './components/NavBar.react';
+// import NavBar from './components/NavBar.react';
 
 class App extends React.Component {
   constructor(props) {
@@ -24,13 +24,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
         <div> This is the App View </div>
         {this.props.children}
       </div>
     )
   }
-
 }
 
-export default App;
+module.exports = App;

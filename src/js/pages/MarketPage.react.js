@@ -10,4 +10,4 @@ class Market extends React.Component {
   } 
 }
 
-export default Market;
+module.exports = Market;
