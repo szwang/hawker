@@ -1,32 +1,41 @@
 // configures routes, including authentication redirects
-import React from 'react';
-import { browserHistory, Router, Route, Link } from 'react-router';
-import { render } from 'react-dom';
+// import React from 'react';
+// import { browserHistory, Router, Route, Link } from 'react-router';
+// import { render } from 'react-dom';
 
 import App from './App';
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import MarketPage from './pages/MarketPage';
-import UserPage from './pages/UserPage';
-import NotFoundPage from '.pages/NotFoundPage';
-
-render((
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <Routh path=''/>
-    </Route>
-  </Router>
-))
 
 export default {
   component: App,
   childRoutes: [
-    // routes that don't require authentication
-    {
-      path: '/'
+    /** Routes that don't require authentication **/
+
+    { 
+      path: '/about',
+      getComponent: (location, cb) => {
+        require.ensure([], (require) => {
+          cb(null, require('./pages/AboutPage'))
+        })
+      }
     },
 
+    /** Routes requiring authentication & redirects **/
 
-    // routes 
+    { 
+      path: '/',
+      getComponent: (location, cb) => {
+        // if user has logged in, direct them to market
+        if(auth.loggedIn()) {
+          return require.ensure([], (require) => {
+            cb(null, require('./pages/MarketPage'))
+          })
+        }
+        // if user is not logged in, direct them to home page
+        return require.ensure([], (require) => {
+          cb(null, require('./pages/Home'))
+        })
+      } 
+    }
+
   ]
 }
