@@ -4,7 +4,9 @@ import React from 'react';
 
 class Dashboard extends React.Component {
   render() {
-    return <h1>This is the Dashboard page</h1>
+    return (
+      <div>This is the Dashboard page</div>
+    )
   } 
 }
 

@@ -2,7 +2,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 // import auth from '../utils/auth'
-import NavBar from './components/NavBar';
+import NavBar from './components/NavBar.react';
 
 const App = React.createClass({
 
@@ -28,6 +28,7 @@ const App = React.createClass({
       <div>
         <NavBar />
         <div> This is the App View </div>
+        {this.props.children}
       </div>
     )
   }

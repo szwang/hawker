@@ -1,8 +1,12 @@
+// organization specific market, home page for logged-in user
+
 import React from 'react';
 
 class Market extends React.Component {
   render() {
-    return <h1>This is the Market page</h1>
+    return (
+      <div>This is the Market page</div>
+    )
   } 
 }
 
