@@ -1,3 +1,5 @@
+// public view of each user, visible to any registered user
+
 import React from 'react';
 
 class User extends React.Component {
