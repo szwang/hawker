@@ -4,24 +4,22 @@ import { Link } from 'react-router'
 // import auth from '../utils/auth'
 import NavBar from './components/NavBar.react';
 
-const App = React.createClass({
-
-  getInitialState() {
-    // return {
-    //   loggedIn: auth.loggedIn()
-    // }
-  },
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+  }
 
   updateAuth(loggedIn) {
     // this.setState({
     //   loggedIn: !!loggedIn
     // })
-  },
+  }
 
   componentWillMount() {
     // auth.onChange = this.updateAuth
     // auth.login()
-  },
+    console.log('loading app view')
+  }
 
   render() {
     return (
@@ -33,6 +31,6 @@ const App = React.createClass({
     )
   }
 
-})
+}
 
 export default App;
