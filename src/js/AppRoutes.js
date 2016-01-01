@@ -5,27 +5,27 @@ function redirectToLogin(nextState, replaceState) {
   if (!auth.loggedIn()) {
     replaceState({
       nextPathname: nextState.location.pathname
-    }, '/login')
+    }, '/login');
   }
 }
 
 // if user is logged in, take them to dashboard
 function redirectToDashboard(nextState, replaceState) {
   if (auth.loggedIn()) {
-    replaceState(null, '/')
+    replaceState(null, '/');
   }
 }
 
 export default {
   childRoutes: [
 
-    /*** Routes that don't require authentication ***/
+    /*** ROUTES ACCESSIBLE BY ANYONE ***/
 
     { 
       path: '/about',
       getComponent: (location, cb) => {
         require.ensure([], (require) => {
-          cb(null, require('./pages/AboutPage.react'))
+          cb(null, require('./pages/AboutPage.react'));
         })
       }
     }, {
@@ -37,7 +37,7 @@ export default {
       }      
     },
 
-    /*** Routes requiring authentication & redirects ***/
+    /*** ROUTES REQUIRING AUTHENTICATION ***/
 
     { /** ROOT PATH **/
       path: '/',
@@ -66,8 +66,8 @@ export default {
       }]
     }, { /** PAGES ONLY ACCESSIBLE IF LOGGED IN
             not logged-in --> Login 
-            logged-in --> UserPage  
-                      --> Other authed pages **/
+            logged-in --> Public page of any user  
+                      --> Personal dashboard page **/
       onEnter: redirectToLogin,
       childRoutes: [{
         path: '/user/:id',

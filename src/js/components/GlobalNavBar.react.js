@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 class GlobalNavBar extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
