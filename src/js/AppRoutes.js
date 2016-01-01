@@ -57,14 +57,13 @@ export default {
              not logged-in --> Login **/
       onEnter: redirectToDashboard,
       childRoutes: [{
-          path: '/login',
-          getComponent: (location, cb) => {
-            require.ensure([], (require) => {
-              cb(null, require('./pages/AuthPage.react'))
-            })
-          }
+        path: '/login',
+        getComponent: (location, cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./pages/AuthPage.react'))
+          })
         }
-      ]
+      }]
     }, { /** PAGES ONLY ACCESSIBLE IF LOGGED IN
             not logged-in --> Login 
             logged-in --> UserPage  
