@@ -3,6 +3,10 @@
 
 Uses AirBnb Style Guide for es6: https://github.com/airbnb/javascript
 
+####Semicolons
+
+Use them when they can be there, except at the end of function and if-statement blocks
+
 ###Commit styles  
 
 Use the following types, a present-tense, declarative summary.  
