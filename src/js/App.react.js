@@ -1,6 +1,6 @@
 // base view for "/"
 import React from 'react'
-import { Link } from 'react-router'
+import GlobalNavBar from './components/GlobalNavBar.react'
 // import auth from '../utils/auth'
 // import NavBar from './components/NavBar.react';
 
@@ -24,6 +24,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <GlobalNavBar />
         <div> This is the App View </div>
         {this.props.children}
       </div>

@@ -28,9 +28,7 @@ export default {
           cb(null, require('./pages/AboutPage.react'))
         })
       }
-    },
-
-    {
+    }, {
       path: '/home',
       getComponent: (location, cb) => {
         require.ensure([], (require) => {
@@ -55,13 +53,10 @@ export default {
           cb(null, require('./pages/HomePage.react'))
         })
       } 
-    },
-
-    { /** logged-in user --> Dashboard
-          not logged-in --> Login **/
+    }, { /** logged-in user --> Dashboard
+             not logged-in --> Login **/
       onEnter: redirectToDashboard,
-      childRoutes: [
-        {
+      childRoutes: [{
           path: '/login',
           getComponent: (location, cb) => {
             require.ensure([], (require) => {
@@ -70,23 +65,26 @@ export default {
           }
         }
       ]
-    },
-
-    { /** PAGES ONLY ACCESSIBLE IF LOGGED IN
+    }, { /** PAGES ONLY ACCESSIBLE IF LOGGED IN
             not logged-in --> Login 
             logged-in --> UserPage  
                       --> Other authed pages **/
       onEnter: redirectToLogin,
-      childRoutes: [
-        {
-          path: '/user/:id',
-          getComponent: (location, cb) => {
-            require.ensure([], (require) => {
-              cb(null, require('./pages/UserPage.react'))
-            })
-          }
+      childRoutes: [{
+        path: '/user/:id',
+        getComponent: (location, cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./pages/UserPage.react'))
+          })
         }
-      ]
+      }, {
+        path: '/dashboard',
+        getComponent: (location, cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./pages/DashboardPage.react'))
+          })
+        }
+      }]
     }
   ]
 }
