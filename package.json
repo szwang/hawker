@@ -34,6 +34,7 @@
     "bcrypt": "^0.8.5",
     "bluebird": "^3.1.1",
     "body-parser": "^1.14.2",
+    "bootstrap": "^4.0.0-alpha.2",
     "express": "^4.13.3",
     "express-session": "^1.12.1",
     "flux": "^2.1.1",
