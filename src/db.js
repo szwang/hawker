@@ -1,17 +1,13 @@
-import Sequelize from 'sequelize';
-import bcrypt from 'bcrypt';
-import promise from 'bluebird';
-import compare from promise.promisify(bcrypt.compare);
-import uuid from 'node-uuid';
+var Sequelize = require('sequelize');
+var bcrypt = require('bcrypt');
+var promise = require('bluebird');
+var compare = promise.promisify(bcrypt.compare);
+var uuid = require('node-uuid');
 
-var orm = new Sequelize('hawker', 'suzanne', 'wang', {
+var orm = new Sequelize('hawker', 'suzanne', 'suzanne', {
   host: 'localhost',
-
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000
-  }
+  port: 8000,
+  dialect: 'mysql'
 });
 
 /** SCHEMA **/
@@ -25,10 +21,10 @@ var Items = orm.define('items', {
 var Users = orm.define('users', {
   username: { type: Sequelize.STRING, allowNull: false },
   password: { type: Sequelize.STRING, allowNull: false },
-  schoolID: { type: Sequelize.INTEGER, allowNull: false }
+  organization: { type: Sequelize.STRING, allowNull: false }
 });
 
-var Schools = orm.define('schools', {
+var Organizations = orm.define('organizations', {
   name: { type: Sequelize.STRING, allowNull: false }
 });
 
@@ -36,9 +32,7 @@ orm.sync();
 
 /** AUTH FUNCTIONS **/
 
-// takes in object { username: , password: } and callback function
-// returns 
-export function login(userInfo, callback) {
+exports.login = function(userInfo, callback) {
   var response = {
     success: false
   };
@@ -47,12 +41,12 @@ export function login(userInfo, callback) {
     where: {
       username: userInfo.username
     }
-  }).then((data) => {
+  }).then(function(data) {
     userData = data;
     hashedPassword = data[0].dataValues.password;
-  }).then((data) => {
+  }).then(function(data) {
     return compare(userInfo.password, hashedPassword)
-      .then((registered) => {
+      .then(function(registered) {
         if(registered) {
           response = userData;
         }
@@ -62,33 +56,36 @@ export function login(userInfo, callback) {
   })
 }
 
-export function signup(username, password, email, callback) {
+exports.signup = function(signupInfo, callback) {
   var response = {};
   var exists;
   Users.findOne({
     where: {
       username: signupInfo.username
     }
-  }).then((user) => {
+  }).then(function(user) {
     exists = user; //TODO see if modification is possible with return statement
-  }).then((user) => {
+  }).then(function(user) {
     if(exists === null) {
-      return bcrypt.genSalt(10, (err, salt) => {
+      return bcrypt.genSalt(10, function(err, salt) {
         if(err) {
           console.log('salt gen error: ', err);
           return;
         }
-        bcrypt.hash(signupInfo.password, salt, (err, hash) => {
+        bcrypt.hash(signupInfo.password, salt, function(err, hash) {
           Users.create({
             username: signupInfo.username,
             password: hash,
-            email: signupInfo.email
-          }).then((userData) => {
+            email: signupInfo.email,
+            organization: signupInfo.org
+          }).then(function(userData) {
             userData.success = true;
             callback(userData);
           })
         })
       })
+    } else {
+      console.log('username already exists')
     }
   })
 }

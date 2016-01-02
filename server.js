@@ -33,3 +33,19 @@ var port = process.env.PORT || 8000;
 
 app.listen(port);
 console.log('Listening on port', port);
+
+/** DB ROUTES **/
+
+var db = require('./src/db.js');
+
+app.post('/login', function(req, res) {
+  db.login(req.body, function(response) {
+    res.send(response);
+  });
+});
+
+app.post('/signup', function(req, res) {
+  db.signup(req.body, function(response) {
+    res.send(response);
+  });
+});

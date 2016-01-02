@@ -38,6 +38,7 @@
     "express-session": "^1.12.1",
     "flux": "^2.1.1",
     "history": "^1.17.0",
+    "mysql": "^2.10.0",
     "node-uuid": "^1.4.7",
     "path": "^0.12.7",
     "react": "^0.14.5",
