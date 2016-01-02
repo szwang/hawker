@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { LogoutButton, LoginButton } from './NavButtons.react'
+import { LogoutButton, LoginButton } from './NavButtons.react';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class GlobalNavBar extends React.Component {
   constructor(props) {
@@ -9,14 +11,27 @@ class GlobalNavBar extends React.Component {
 
   render() {
     return (
-      <div>
-        <div style={{ float: 'left'}}>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-          { this.props.loggedIn ? <Link to="/dashboard">My Profile</Link> : null }
-          { this.props.loggedIn ? <LogoutButton /> : <LoginButton /> }
-        </div> 
-      </div>
+      <Navbar inverse>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/"> Hawker </Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav pullRight>
+            <LinkContainer to={{ pathname: '/about' }}>
+              <NavItem>About</NavItem>
+            </LinkContainer>
+            { this.props.loggedIn ?
+              <LinkContainer to={{ pathname: '/dashboard' }}>
+                <NavItem>My Profile</NavItem>
+              </LinkContainer> :
+              null }
+
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     )
   } 
 }
