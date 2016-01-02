@@ -8,16 +8,12 @@ import { auth0Key } from '../../secretKeys.js'
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      loggedIn: false
+    }
   }
 
   componentWillMount() {
-    this.lock = new Auth0Lock(auth0Key, 'hawker.auth0.com');
-  }
-
-  updateAuth(loggedIn) {
-    // this.setState({
-    //   loggedIn: !!loggedIn
-    // })
   }
 
   componentWillMount() {
@@ -29,7 +25,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <GlobalNavBar />
+        <GlobalNavBar loggedIn={this.state.loggedIn} />
         <div> This is the App View </div>
         {this.props.children}
       </div>

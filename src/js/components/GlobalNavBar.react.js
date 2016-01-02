@@ -5,9 +5,6 @@ import { LogoutButton, LoginButton } from './NavButtons.react'
 class GlobalNavBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loggedIn: true
-    }
   }
 
   render() {
@@ -16,8 +13,8 @@ class GlobalNavBar extends React.Component {
         <div style={{ float: 'left'}}>
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
-          { this.state.loggedIn ? <Link to="/dashboard">My Profile</Link> : null }
-          { this.state.loggedIn ? <LogoutButton /> : <LoginButton /> }
+          { this.props.loggedIn ? <Link to="/dashboard">My Profile</Link> : null }
+          { this.props.loggedIn ? <LogoutButton /> : <LoginButton /> }
         </div> 
       </div>
     )

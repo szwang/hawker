@@ -4,15 +4,18 @@ import { Link } from 'react-router';
 export class LoginButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loggedIn: false
-    }
+    
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
+    console.log('login button clicked')
   }
 
   render() {
     return (
-      <div>
-        Login Button
+      <div onClick={this.onClick}>
+        Login
       </div>
     )
   } 
@@ -21,15 +24,12 @@ export class LoginButton extends React.Component {
 export class LogoutButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loggedIn: false
-    }
   }
 
   render() {
     return (
       <div>
-        Logout Button
+        Logout
       </div>
     )
   } 
