@@ -21,8 +21,12 @@ Use the following types, a present-tense, declarative summary.
 
 Thanks to: http://karma-runner.github.io/0.13/dev/git-commit-msg.html
 
-######Examples
+######Examples  
 
 `[feat] add basic nav bar` 
 
+#### Misc
 
+**To bind a function to component context***  
+
+`this.showLock = () => this.showLock();`
