@@ -36,26 +36,60 @@ orm.sync();
 
 /** AUTH FUNCTIONS **/
 
-export function login(username, password, callback) {
+// takes in object { username: , password: } and callback function
+// returns 
+export function login(userInfo, callback) {
   var response = {
     success: false
-  }
+  };
   var hashedPassword, userData;
   Users.findAll({
     where: {
-      username: username
+      username: userInfo.username
     }
   }).then((data) => {
     userData = data;
     hashedPassword = data[0].dataValues.password;
   }).then((data) => {
-    return compare(password, hashedPassword)
+    return compare(userInfo.password, hashedPassword)
       .then((registered) => {
         if(registered) {
-          response.user = userData;
+          response = userData;
         }
         response.success = registered;
         callback(response);
       })
   })
 }
+
+export function signup(username, password, email, callback) {
+  var response = {};
+  var exists;
+  Users.findOne({
+    where: {
+      username: signupInfo.username
+    }
+  }).then((user) => {
+    exists = user; //TODO see if modification is possible with return statement
+  }).then((user) => {
+    if(exists === null) {
+      return bcrypt.genSalt(10, (err, salt) => {
+        if(err) {
+          console.log('salt gen error: ', err);
+          return;
+        }
+        bcrypt.hash(signupInfo.password, salt, (err, hash) => {
+          Users.create({
+            username: signupInfo.username,
+            password: hash,
+            email: signupInfo.email
+          }).then((userData) => {
+            userData.success = true;
+            callback(userData);
+          })
+        })
+      })
+    }
+  })
+}
+
