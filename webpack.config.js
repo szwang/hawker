@@ -16,11 +16,6 @@ module.exports = {
   devtool: 'source-map',
 
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: 'app/index.tpl.html',
-    //   inject: 'body',
-    //   filename: 'index.html'
-    // }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
