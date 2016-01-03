@@ -7,7 +7,8 @@ var uuid = require('node-uuid');
 var orm = new Sequelize('hawker', 'suzanne', 'suzanne', {
   host: 'localhost',
   port: 8000,
-  dialect: 'mysql'
+  dialect: 'mysql',
+  pool: { maxConnections: 50, maxIdleTime: 30},
 });
 
 /** SCHEMA **/

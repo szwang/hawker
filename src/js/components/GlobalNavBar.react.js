@@ -28,7 +28,9 @@ class GlobalNavBar extends React.Component {
                 <NavItem>My Profile</NavItem>
               </LinkContainer> :
               null }
-
+            { this.props.loggedIn ?
+              <NavItem><LogoutButton /></NavItem> :
+              <NavItem><LoginButton /></NavItem> }
           </Nav>
         </Navbar.Collapse>
       </Navbar>
