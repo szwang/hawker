@@ -10,7 +10,7 @@ export class LoginButton extends React.Component {
 
   onClick() {
     console.log('login button clicked');
-    ModalActionCreators.openModal('login');
+    AuthActionCreators.openAuthModal('login');
   }
 
   render() {
