@@ -9,7 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: true,
+      loggedIn: false,
       modalType: null
     }
 
@@ -18,15 +18,15 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    AuthModalStore.addChangeListener(this.modalOpen);
+    ModalStore.addChangeListener(this.modalOpen);
   }
 
   componentDidMount() {
-    
+
   }
 
   componentWillUnmount() {
-    AuthModalStore.removeChangeListener(this.modalOpen)
+    ModalStore.removeChangeListener(this.modalOpen)
   }
 
   modalOpen() {
@@ -42,8 +42,7 @@ class App extends React.Component {
       <div className={styles.appContainer}>
         <GlobalNavBar loggedIn={this.state.loggedIn} />
         <div className= {styles.test}> This is the App View </div>
-        { this.state.modalType ? <ModalContainer id={this.state.modalType} close={this.modalClose} /> :
-        null }
+        <ModalContainer open={this.modalOpen} />
         {this.props.children}
       </div>
     )

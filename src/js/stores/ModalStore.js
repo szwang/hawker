@@ -1,5 +1,5 @@
 import Dispatcher from '../AppDispatcher';
-import Constants from '../AppConstants';
+import ActionType from '../AppConstants';
 import EventEmitter from 'events';
 import assign from 'object-assign';
 
@@ -8,6 +8,7 @@ const _modal = { type: null };
 const CHANGE_EVENT = 'change';
 
 function setModalType(type) {
+  console.log(type);
   _modal.type = type;
 }
 
@@ -22,7 +23,7 @@ const ModalStore = assign({}, EventEmitter.prototype, {
   removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   },
-  getAuthModalType() {
+  getModalType() {
     return _modal.type;
   }
 })
@@ -32,7 +33,7 @@ ModalStore.dispatchToken = Dispatcher.register(function(payload) {
   switch(payload.type) {
     case ActionType.OPEN_AUTH_MODAL:
       setModalType(payload.modalType);
-      ModalStore.emitChange();
+      ModalStore.emitChange(); //to app component
       break;
 
     default:

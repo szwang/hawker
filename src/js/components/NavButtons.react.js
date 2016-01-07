@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import AuthActionCreators from '../actions/AuthActionCreators';
 
 export class LoginButton extends React.Component {
   constructor(props) {

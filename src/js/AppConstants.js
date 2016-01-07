@@ -1,9 +1,5 @@
 import keymirror from 'keymirror';
 
-export default {
-
-  ActionTypes: keymirror({
-    OPEN_LOGIN_MODAL: null
-  })
-  
-}
+export default keymirror({
+    OPEN_AUTH_MODAL: null
+})
