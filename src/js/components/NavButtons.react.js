@@ -4,12 +4,13 @@ import { Link } from 'react-router';
 export class LoginButton extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.onClick = this.onClick.bind(this);
   }
 
   onClick() {
-    console.log('login button clicked')
+    console.log('login button clicked');
+    ModalActionCreators.openModal('login');
   }
 
   render() {
