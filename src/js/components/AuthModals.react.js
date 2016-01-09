@@ -25,9 +25,6 @@ export class LoginModal extends React.Component {
   render() {
     return (
       <div>
-        <Modal.Header closeButton>
-          Login
-        </Modal.Header>
         <Modal.Body>
           <Input 
             type="text" 
@@ -52,18 +49,57 @@ export class LoginModal extends React.Component {
 export class SignupModal extends React.Component {
 
   //TODO add validation
-  
+
   constructor(props) {
     super(props);
+
+    this.state = {
+      email: '',
+      username: '',
+      password: '',
+      passwordConfirm: '',
+      school: ''
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange() {
+
   }
 
   render() {
     return (
       <div>
-        <Modal.Header closeButton>
-          Signup
-        </Modal.Header>
         <Modal.Body>
+          <Input type="select" placeholder="Select school">
+            <option>Select school...</option>
+            <option value="other">...</option>
+          </Input>
+          <Input 
+            type="text" 
+            value={this.state.email} 
+            placeholder="School email" 
+            ref="email"
+            onChange={this.handleChange} />
+          <Input 
+            type="text" 
+            value={this.state.username} 
+            placeholder="Username" 
+            ref="username"
+            onChange={this.handleChange} />
+          <Input 
+            type="text" 
+            value={this.state.password} 
+            placeholder="Password"
+            ref="password"
+            onChange={this.handleChange} />
+          <Input 
+            type="text" 
+            value={this.state.passwordConfirm} 
+            placeholder="Re-enter password"
+            ref="passwordConfim"
+            onChange={this.handleChange} />
         </Modal.Body>
       </div>
 
