@@ -5,7 +5,7 @@ export default {
 
   openAuthModal(modalType) {
     Dispatcher.dispatch({
-      type: ActionType.OPEN_AUTH_MODAL,
+      type: ActionType.OPEN_MODAL,
       modalType: modalType //login, signup, forgot password
     })
   }

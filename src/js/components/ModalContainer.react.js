@@ -16,7 +16,7 @@ class ModalContainer extends React.Component {
     this.close = this.close.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     ModalStore.addChangeListener(this.open);
   }
 
@@ -25,22 +25,23 @@ class ModalContainer extends React.Component {
   }
 
   open() {
-    this.setState({ showModal: true });
+    this.setState({ showModal: true, modalType: ModalStore.getModalType() });
   }
 
   close() {
-    this.setState({ showModal: false });
+    this.setState({ showModal: false, modalType: null });
   }
 
   render() {
     var modalContent;
+    
     //grab correct modal type
     if(this.state.modalType === 'login') {
       modalContent = <LoginModal />
     } else if(this.state.modalType === 'signup') {
       modalContent = <SignupModal />
     } else {
-        null;
+      modalContent = null;
     }
 
     return (
@@ -50,3 +51,6 @@ class ModalContainer extends React.Component {
     )
   }
 }
+
+export default ModalContainer;
+

@@ -31,7 +31,7 @@ const ModalStore = assign({}, EventEmitter.prototype, {
 ModalStore.dispatchToken = Dispatcher.register(function(payload) {
 
   switch(payload.type) {
-    case ActionType.OPEN_AUTH_MODAL:
+    case ActionType.OPEN_MODAL:
       setModalType(payload.modalType);
       ModalStore.emitChange(); //to app component
       break;
