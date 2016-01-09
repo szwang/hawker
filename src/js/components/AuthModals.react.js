@@ -21,7 +21,6 @@ export class LoginModal extends React.Component {
     })
   }
 
-
   render() {
     return (
       <div>
@@ -65,16 +64,22 @@ export class SignupModal extends React.Component {
   }
 
   handleChange() {
-
+    this.setState({
+      email: this.refs.email.getValue(),
+      username: this.refs.username.getValue(),
+      password: this.refs.password.getValue(),
+      passwordConfirm: this.refs.passwordConfirm.getValue(),
+      school: this.refs.school.getValue()
+    })
   }
 
   render() {
     return (
       <div>
         <Modal.Body>
-          <Input type="select" placeholder="Select school">
-            <option>Select school...</option>
-            <option value="other">...</option>
+          <Input type="select" value={this.state.school} ref="school">
+            <option value="default">Select school</option>
+            <option value="...">...</option>
           </Input>
           <Input 
             type="text" 
@@ -100,6 +105,7 @@ export class SignupModal extends React.Component {
             placeholder="Re-enter password"
             ref="passwordConfim"
             onChange={this.handleChange} />
+          <ButtonInput value="Sign Up" />
         </Modal.Body>
       </div>
 
