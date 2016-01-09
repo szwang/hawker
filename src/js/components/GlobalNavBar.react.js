@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { LogoutButton, LoginButton } from './NavButtons.react';
+import { LogoutButton, LoginButton, SignupButton } from './AuthNavButtons.react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -30,6 +30,9 @@ class GlobalNavBar extends React.Component {
               null }
             { this.props.loggedIn ?
               <NavItem><LogoutButton /></NavItem> :
+              <NavItem><SignupButton /></NavItem> }
+            { this.props.loggedIn ?
+              null :
               <NavItem><LoginButton /></NavItem> }
           </Nav>
         </Navbar.Collapse>

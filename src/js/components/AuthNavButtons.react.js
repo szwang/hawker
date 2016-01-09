@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import AuthActionCreators from '../actions/AuthActionCreators';
 
 export class LoginButton extends React.Component {
@@ -10,7 +9,6 @@ export class LoginButton extends React.Component {
   }
 
   onClick() {
-    console.log('login button clicked');
     AuthActionCreators.openAuthModal('login');
   }
 
@@ -18,6 +16,26 @@ export class LoginButton extends React.Component {
     return (
       <div onClick={this.onClick}>
         Login
+      </div>
+    )
+  } 
+}
+
+export class SignupButton extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
+    AuthActionCreators.openAuthModal('signup');
+  }
+
+  render() {
+    return (
+      <div onClick={this.onClick}>
+        Signup
       </div>
     )
   } 
@@ -36,5 +54,4 @@ export class LogoutButton extends React.Component {
     )
   } 
 }
-
 
