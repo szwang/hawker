@@ -55,11 +55,23 @@ export class SignupModal extends React.Component {
       username: '',
       password: '',
       passwordConfirm: '',
-      school: ''
+      school: '',
+      usernameValid: false,
+      passwordValid: false,
+      emailValid: false,
+      passwordConfirmValid: false
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handleEmailChange = this.handleUsernameChange.bind(this);
+    this.handleSchoolChange = this.handleSchoolChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handlePasswordConfirmChange = this.handlePasswordConfirmChange.bind(this);
+    
+    this.usernameValidationState = this.usernameValidationState.bind(this);
+    this.emailValidationState = this.emailValidationState.bind(this);
     this.passwordValidationState = this.passwordValidationState.bind(this);
+    this.passwordConfirmValidationState = this.passwordConfirmValidationState.bind(this);
   }
 
   handleChange() {
@@ -69,6 +81,38 @@ export class SignupModal extends React.Component {
       password: this.refs.password.getValue(),
       passwordConfirm: this.refs.passwordConfirm.getValue()
     })
+  }
+
+  handleUsernameChange() {
+    this.setState({ username: this.refs.username.getValue() });
+    if(this.usernameValidationState() === 'success') {
+      this.setState({ usernameValid: true });
+    }
+  }
+
+  handleEmailChange() {
+    this.setState({ email: this.refs.email.getValue() });
+    if(this.emailValidationState() === 'success') {
+      this.setState({ emailValid: true });
+    }
+  }
+
+  handleSchoolChange() {
+    this.setState({ school: this.refs.school.getValue() });
+  }
+
+  handlePasswordChange() {
+    this.setState({ password: this.refs.password.getValue() });
+    if(this.passwordValidationState() === 'success') {
+      this.setState({ passwordValid: true });
+    }
+  }
+
+  handlePasswordConfirmChange() {
+    this.setState({ passwordConfirm: this.refs.passwordConfirm.getValue() });
+    if(this.passwordConfirmValidationState() === 'success') {
+      this.setState({ passwordConfirmValid: true });
+    }
   }
 
   usernameValidationState() {
@@ -106,8 +150,8 @@ export class SignupModal extends React.Component {
     return (
       <div>
         <Modal.Body>
-          <Input type="select" label="Select a school" value={this.state.school}>
-            <option selected>Select your institution</option>
+          <Input type="select" value={this.state.school}>
+            <option defaultValue>Select your institution</option>
             {schoolOptions}
           </Input>
           <Input 
