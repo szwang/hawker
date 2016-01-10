@@ -106,7 +106,8 @@ export class SignupModal extends React.Component {
     return (
       <div>
         <Modal.Body>
-          <Input type="select" value={this.state.school}>
+          <Input type="select" label="Select a school" value={this.state.school}>
+            <option selected>Select your institution</option>
             {schoolOptions}
           </Input>
           <Input 
@@ -115,28 +116,28 @@ export class SignupModal extends React.Component {
             placeholder="School email" 
             ref="email"
             onChange={this.handleChange}
-            bsStyle={this.emailValidationState()}
+            bsStyle={this.emailValidationState()} hasFeedback
             help="Enter your valid school email address with .edu ending" />
           <Input 
             type="text" 
             value={this.state.username} 
             placeholder="Username" 
             ref="username"
-            bsStyle={this.usernameValidationState()}
+            bsStyle={this.usernameValidationState()} hasFeedback
             onChange={this.handleChange} />
           <Input 
             type="text" 
             value={this.state.password} 
             placeholder="Password"
             ref="password"
-            bsStyle={this.passwordValidationState()}
+            bsStyle={this.passwordValidationState()} hasFeedback
             onChange={this.handleChange} />
           <Input 
             type="text" 
             value={this.state.passwordConfirm} 
             placeholder="Re-enter password"
             ref="passwordConfirm"
-            bsStyle={this.passwordConfirmValidationState()}
+            bsStyle={this.passwordConfirmValidationState()} hasFeedback
             onChange={this.handleChange} />
           <ButtonInput value="Sign Up" />
         </Modal.Body>
