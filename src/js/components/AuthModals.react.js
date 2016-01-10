@@ -87,7 +87,7 @@ export class SignupModal extends React.Component {
     return { usernameStyle, usernameValid };
   }
 
-  emailValidationState() {
+  emailValidationState() { //TODO: allow for shorter email lengths
     let emailStyle;
     let length = this.state.email.length;
     let tail = this.state.email.slice(length - 4, length);
@@ -134,10 +134,10 @@ export class SignupModal extends React.Component {
       password: this.refs.password.getValue(),
       passwordConfirm: this.refs.passwordConfirm.getValue()
     });
-    this.setState(usernameValidationState());
-    this.setState(emailValidationState());
-    this.setState(passwordValidationState());
-    this.setState(passwordConfirmValidationState());
+    this.setState(this.usernameValidationState());
+    this.setState(this.emailValidationState());
+    this.setState(this.passwordValidationState());
+    this.setState(this.passwordConfirmValidationState());
   }
 
   handleSubmit() {
@@ -146,6 +146,7 @@ export class SignupModal extends React.Component {
     } else {
       console.log("need to fix form before submit")
     }
+    console.log(this.state);
   }
 
   render() {
