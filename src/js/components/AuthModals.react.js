@@ -151,7 +151,7 @@ export class SignupModal extends React.Component {
     this.passwordConfirmValidationState() === 'success' ? arr.push(true) : arr.push(false);
     this.emailValidationState() === 'success' ? arr.push(true) : arr.push(false);
 
-    if(_.reduce(arr, (i, j) => { return i && j; }) && this.state.school) {
+    if(_.reduce(arr, (i, j) => { return i && j; }) && this.state.school && this.state.school !== 'Select your school') {
       console.log('all valid!');
     } else {
       console.log('not all valid');
@@ -174,7 +174,7 @@ export class SignupModal extends React.Component {
             ref="school" 
             value={this.state.school} 
             onChange={this.handleSchoolChange} >
-            <option defaultValue>Select your institution</option>
+            <option defaultValue>Select your school</option>
             {schoolOptions}
           </Input>
           <Input
