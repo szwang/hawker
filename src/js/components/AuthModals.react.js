@@ -175,7 +175,7 @@ export class SignupModal extends React.Component {
             value={this.state.email}
             placeholder="Email"
             ref="email"
-            bsStyle={this.usernameValidationState()} hasFeedback
+            bsStyle={this.emailValidationState()} hasFeedback
             onChange={this.handleEmailChange} />
           <Input 
             type="text" 
