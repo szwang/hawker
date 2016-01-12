@@ -28,7 +28,7 @@ const ModalStore = assign({}, EventEmitter.prototype, {
   }
 })
 
-ModalStore.dispatchToken = Dispatcher.register(function(payload) {
+ModalStore.dispatchToken = Dispatcher.register((payload) => {
 
   switch(payload.type) {
     case ActionType.OPEN_MODAL:
