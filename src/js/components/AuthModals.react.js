@@ -1,5 +1,6 @@
 import React from 'react';
 import { ButtonInput, Input, Modal } from 'react-bootstrap';
+import _ from 'lodash';
 
 export class LoginModal extends React.Component {
 
@@ -72,7 +73,7 @@ export class SignupModal extends React.Component {
     this.emailValidationState = this.emailValidationState.bind(this);
     this.passwordValidationState = this.passwordValidationState.bind(this);
     this.passwordConfirmValidationState = this.passwordConfirmValidationState.bind(this);
-  
+
     this.submitForm = this.submitForm.bind(this);
   }
 
@@ -86,41 +87,41 @@ export class SignupModal extends React.Component {
   // }
   handleEmailChange() {
     this.setState({ email: this.refs.email.getValue() });
-    console.log('email: ', this.state.email)
-    if(this.emailValidationState() === 'success') {
-      this.setState({ emailValid: true });
-    }
+    // if(this.emailValidationState() === 'success') {
+    //   this.setState({ emailValid: true });
+    // }
   }
 
   handleUsernameChange() {
     this.setState({ username: this.refs.username.getValue() });
-    if(this.usernameValidationState() === 'success') {
-      this.setState({ usernameValid: true });
-    }
+    // if(this.usernameValidationState() === 'success') {
+    //   this.setState({ usernameValid: true });
+    // }
   }
 
 
   handleSchoolChange() {
+    console.log('handleSchoolChange: ', this.refs.school.getValue())
     this.setState({ school: this.refs.school.getValue() });
   }
 
   handlePasswordChange() {
     this.setState({ password: this.refs.password.getValue() });
-    if(this.passwordValidationState() === 'success') {
-      this.setState({ passwordValid: true });
-    }
+    // if(this.passwordValidationState() === 'success') {
+    //   this.setState({ passwordValid: true });
+    // }
   }
 
   handlePasswordConfirmChange() {
     this.setState({ passwordConfirm: this.refs.passwordConfirm.getValue() });
-    if(this.passwordConfirmValidationState() === 'success') {
-      this.setState({ passwordConfirmValid: true });
-    }
+    // if(this.passwordConfirmValidationState() === 'success') {
+    //   this.setState({ passwordConfirmValid: true });
+    // }
   }
 
   usernameValidationState() {
     let length = this.state.username.length;
-    if(length >= 4) return 'success' 
+    if(length >= 4) return 'success';
     else if(length > 0) return 'error';
   }
 
@@ -144,7 +145,13 @@ export class SignupModal extends React.Component {
   }
 
   submitForm() {
-    if(this.state.usernameValid && this.state.passwordConfirmValid && this.state.passwordValid && this.state.emailValid && this.state.school) {
+    let arr = [];
+    this.usernameValidationState() === 'success' ? arr.push(true) : arr.push(false);
+    this.passwordValidationState() === 'success' ? arr.push(true) : arr.push(false);
+    this.passwordConfirmValidationState() === 'success' ? arr.push(true) : arr.push(false);
+    this.emailValidationState() === 'success' ? arr.push(true) : arr.push(false);
+
+    if(_.reduce(arr, (i, j) => { return i && j; }) && this.state.school) {
       console.log('all valid!');
     } else {
       console.log('not all valid');
@@ -185,14 +192,14 @@ export class SignupModal extends React.Component {
             bsStyle={this.usernameValidationState()} hasFeedback
             onChange={this.handleUsernameChange} />
           <Input 
-            type="text" 
+            type="password" 
             value={this.state.password} 
             placeholder="Password"
             ref="password"
             bsStyle={this.passwordValidationState()} hasFeedback
             onChange={this.handlePasswordChange} />
           <Input 
-            type="text" 
+            type="password" 
             value={this.state.passwordConfirm} 
             placeholder="Re-enter password"
             ref="passwordConfirm"
