@@ -1,20 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { LogoutButton, LoginButton, SignupButton } from './AuthNavButtons.react';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 class GlobalNavBar extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
     return (
-      <div>
-        <div style={{ float: 'left'}}>
-          <Link to="/">Home</Link>{' '}
-          <Link to="/about">About</Link>{' '}
-          <Link to="/dashboard">My Profile</Link>{' '}
-        </div> 
-      </div>
+      <Navbar inverse>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <Link to="/"> Hawker </Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav pullRight>
+            <LinkContainer to={{ pathname: '/about' }}>
+              <NavItem>About</NavItem>
+            </LinkContainer>
+            { this.props.loggedIn ?
+              <LinkContainer to={{ pathname: '/dashboard' }}>
+                <NavItem>My Profile</NavItem>
+              </LinkContainer> :
+              null }
+            { this.props.loggedIn ?
+              <NavItem><LogoutButton /></NavItem> :
+              <NavItem><SignupButton /></NavItem> }
+            { this.props.loggedIn ?
+              null :
+              <NavItem><LoginButton /></NavItem> }
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     )
   } 
 }

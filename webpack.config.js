@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -14,6 +15,15 @@ module.exports = {
 
   devtool: 'source-map',
 
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('app.css', {
+      allChunks: true
+    })
+  ],
+
   module: {
     loaders: [
       {
@@ -22,21 +32,10 @@ module.exports = {
         loaders: ['babel?presets[]=react,presets[]=es2015']
       },
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         exclude: /node_modules/,
-        loaders: ['style', 'css', 'sass']
+        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]')
       }
     ]
-  },
-
-  plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: 'app/index.tpl.html',
-    //   inject: 'body',
-    //   filename: 'index.html'
-    // }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ]
+  }
 };

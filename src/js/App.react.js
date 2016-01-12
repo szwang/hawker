@@ -1,31 +1,33 @@
 // base view for "/"
-import React from 'react'
-import GlobalNavBar from './components/GlobalNavBar.react'
-// import auth from '../utils/auth'
-// import NavBar from './components/NavBar.react';
+import React from 'react';
+import GlobalNavBar from './components/GlobalNavBar.react';
+import styles from '../styles/global.css';
+import ModalContainer from './components/ModalContainer.react';
+import ModalStore from './stores/ModalStore';
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
-  }
-
-  updateAuth(loggedIn) {
-    // this.setState({
-    //   loggedIn: !!loggedIn
-    // })
+    super(props);
+    this.state = {
+      loggedIn: false
+    }
   }
 
   componentWillMount() {
-    // auth.onChange = this.updateAuth
-    // auth.login()
-    console.log('loading app view')
+  }
+
+  componentDidMount() {
+  }
+
+  componentWillUnmount() {
   }
 
   render() {
     return (
-      <div>
-        <GlobalNavBar />
-        <div> This is the App View </div>
+      <div className={styles.appContainer}>
+        <GlobalNavBar loggedIn={this.state.loggedIn} />
+        <div className= {styles.test}> This is the App View </div>
+        <ModalContainer />
         {this.props.children}
       </div>
     )
