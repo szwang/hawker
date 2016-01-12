@@ -51,11 +51,11 @@ export class SignupModal extends React.Component {
     super(props);
 
     this.state = {
-      email: '',
       username: '',
+      email: '',
       password: '',
       passwordConfirm: '',
-      school: '',
+      school: null,
       usernameValid: false,
       passwordValid: false,
       emailValid: false,
@@ -63,7 +63,7 @@ export class SignupModal extends React.Component {
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handleEmailChange = this.handleUsernameChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handleSchoolChange = this.handleSchoolChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handlePasswordConfirmChange = this.handlePasswordConfirmChange.bind(this);
@@ -72,15 +72,24 @@ export class SignupModal extends React.Component {
     this.emailValidationState = this.emailValidationState.bind(this);
     this.passwordValidationState = this.passwordValidationState.bind(this);
     this.passwordConfirmValidationState = this.passwordConfirmValidationState.bind(this);
+  
+    this.submitForm = this.submitForm.bind(this);
   }
 
-  handleChange() {
-    this.setState({
-      email: this.refs.email.getValue(),
-      username: this.refs.username.getValue(),
-      password: this.refs.password.getValue(),
-      passwordConfirm: this.refs.passwordConfirm.getValue()
-    })
+  // handleChange() {
+  //   this.setState({
+  //     email: this.refs.email.getValue(),
+  //     username: this.refs.username.getValue(),
+  //     password: this.refs.password.getValue(),
+  //     passwordConfirm: this.refs.passwordConfirm.getValue()
+  //   })
+  // }
+  handleEmailChange() {
+    this.setState({ email: this.refs.email.getValue() });
+    console.log('email: ', this.state.email)
+    if(this.emailValidationState() === 'success') {
+      this.setState({ emailValid: true });
+    }
   }
 
   handleUsernameChange() {
@@ -90,12 +99,6 @@ export class SignupModal extends React.Component {
     }
   }
 
-  handleEmailChange() {
-    this.setState({ email: this.refs.email.getValue() });
-    if(this.emailValidationState() === 'success') {
-      this.setState({ emailValid: true });
-    }
-  }
 
   handleSchoolChange() {
     this.setState({ school: this.refs.school.getValue() });
@@ -140,6 +143,14 @@ export class SignupModal extends React.Component {
     else if(this.state.passwordConfirm.length > 0) return 'error';
   }
 
+  submitForm() {
+    if(this.state.usernameValid && this.state.passwordConfirmValid && this.state.passwordValid && this.state.emailValid && this.state.school) {
+      console.log('all valid!');
+    } else {
+      console.log('not all valid');
+    }
+  }
+
   render() {
     var schools = [['wellesley', 'Wellesley College'], ['mit', "MIT"]];
     var schoolOptions = schools.map((school, i) => { //TODO: fix dropdown
@@ -147,43 +158,47 @@ export class SignupModal extends React.Component {
         <option key={i} value={school[0]}>{school[1]}</option>
       )
     })
+
     return (
       <div>
         <Modal.Body>
-          <Input type="select" value={this.state.school}>
+          <Input 
+            type="select" 
+            ref="school" 
+            value={this.state.school} 
+            onChange={this.handleSchoolChange} >
             <option defaultValue>Select your institution</option>
             {schoolOptions}
           </Input>
-          <Input 
-            type="text" 
-            value={this.state.email} 
-            placeholder="School email" 
+          <Input
+            type="text"
+            value={this.state.email}
+            placeholder="Email"
             ref="email"
-            onChange={this.handleChange}
-            bsStyle={this.emailValidationState()} hasFeedback
-            help="Enter your valid school email address with .edu ending" />
+            bsStyle={this.usernameValidationState()} hasFeedback
+            onChange={this.handleEmailChange} />
           <Input 
             type="text" 
             value={this.state.username} 
             placeholder="Username" 
             ref="username"
             bsStyle={this.usernameValidationState()} hasFeedback
-            onChange={this.handleChange} />
+            onChange={this.handleUsernameChange} />
           <Input 
             type="text" 
             value={this.state.password} 
             placeholder="Password"
             ref="password"
             bsStyle={this.passwordValidationState()} hasFeedback
-            onChange={this.handleChange} />
+            onChange={this.handlePasswordChange} />
           <Input 
             type="text" 
             value={this.state.passwordConfirm} 
             placeholder="Re-enter password"
             ref="passwordConfirm"
             bsStyle={this.passwordConfirmValidationState()} hasFeedback
-            onChange={this.handleChange} />
-          <ButtonInput value="Sign Up" />
+            onChange={this.handlePasswordConfirmChange} />
+          <ButtonInput onClick={this.submitForm} value="Sign Up" />
         </Modal.Body>
       </div>
 

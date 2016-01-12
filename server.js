@@ -29,7 +29,7 @@ app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, '/src/index.html'));
 });
 
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || 8800;
 
 app.listen(port);
 console.log('Listening on port', port);

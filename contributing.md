@@ -29,4 +29,4 @@ Thanks to: http://karma-runner.github.io/0.13/dev/git-commit-msg.html
 
 **To bind a function to component context***  
 
-`this.showLock = () => this.showLock();`
+`this.showLock = this.showLock.bind(this);`
