@@ -1,6 +1,7 @@
 import React from 'react';
 import { ButtonInput, Input, Modal } from 'react-bootstrap';
 import _ from 'lodash';
+import AuthActionCreators from '../actions/AuthActionCreators';
 
 export class LoginModal extends React.Component {
 
@@ -60,7 +61,8 @@ export class SignupModal extends React.Component {
       usernameValid: false,
       passwordValid: false,
       emailValid: false,
-      passwordConfirmValid: false
+      passwordConfirmValid: false,
+      submitSuccess: true
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -119,7 +121,7 @@ export class SignupModal extends React.Component {
     // }
   }
 
-  usernameValidationState() {
+  usernameValidationState() { // TODO: refactor so there's a ternary in bsStyle instead of a function
     let length = this.state.username.length;
     if(length >= 4) return 'success';
     else if(length > 0) return 'error';
@@ -153,8 +155,18 @@ export class SignupModal extends React.Component {
 
     if(_.reduce(arr, (i, j) => { return i && j; }) && this.state.school && this.state.school !== 'Select your school') {
       console.log('all valid!');
+      //send to server
+      let data = {
+        username: this.state.username,
+        password: this.state.password,
+        email: this.state.email,
+        school: this.state.school
+      }
+
+      AuthActionCreators.signup(data);
     } else {
       console.log('not all valid');
+      this.setState({ submitSuccess: false });
     }
   }
 
@@ -205,8 +217,11 @@ export class SignupModal extends React.Component {
             ref="passwordConfirm"
             bsStyle={this.passwordConfirmValidationState()} hasFeedback
             onChange={this.handlePasswordConfirmChange} />
-          <ButtonInput onClick={this.submitForm} value="Sign Up" />
+          <div> {!this.state.submitSuccess ? "Please make sure all fields are valid." : null} </div>
         </Modal.Body>
+        <Modal.Footer>
+          <ButtonInput onClick={this.submitForm} value="Sign Up" />
+        </Modal.Footer>
       </div>
 
     )

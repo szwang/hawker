@@ -45,7 +45,9 @@ app.post('/login', function(req, res) {
 });
 
 app.post('/signup', function(req, res) {
+  console.log('server received signup, ', req.body);
   db.signup(req.body, function(response) {
+    console.log('db response: ', response);
     res.send(response);
   });
 });

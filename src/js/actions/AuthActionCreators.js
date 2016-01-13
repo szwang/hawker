@@ -1,5 +1,6 @@
 import Dispatcher from '../AppDispatcher';
 import ActionType from '../AppConstants';
+import { post } from '../utils/ServerUtils';
 
 export default {
 
@@ -8,6 +9,14 @@ export default {
     Dispatcher.dispatch({
       type: ActionType.OPEN_MODAL,
       modalType: modalType //login, signup, forgot password
+    })
+  },
+
+  signup(data) {
+    console.log('signup action called: ', data);
+    post('/signup', data)
+    .then((response) => {
+      console.log('response: ', response);
     })
   }
 
