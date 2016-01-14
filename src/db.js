@@ -60,6 +60,7 @@ exports.login = function(userInfo, callback) {
 exports.signup = function(signupInfo, callback) {
   var response = {};
   var exists;
+  console.log('info passed to db: ', signupInfo);
   Users.findOne({
     where: {
       username: signupInfo.username
@@ -71,22 +72,24 @@ exports.signup = function(signupInfo, callback) {
       return bcrypt.genSalt(10, function(err, salt) {
         if(err) {
           console.log('salt gen error: ', err);
-          return;
+          callback({ success: false });
         }
         bcrypt.hash(signupInfo.password, salt, function(err, hash) {
           Users.create({
             username: signupInfo.username,
             password: hash,
             email: signupInfo.email,
-            organization: signupInfo.org
+            school: signupInfo.school
           }).then(function(userData) {
             userData.success = true;
+            console.log('user data submitted to db: ', userData)
             callback(userData);
           })
         })
       })
     } else {
       console.log('username already exists')
+      callback({ success: false })
     }
   })
 }
