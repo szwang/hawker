@@ -22,10 +22,12 @@ var Items = orm.define('items', {
 var Users = orm.define('users', {
   username: { type: Sequelize.STRING, allowNull: false },
   password: { type: Sequelize.STRING, allowNull: false },
-  organization: { type: Sequelize.STRING, allowNull: false }
+  school: { type: Sequelize.STRING, allowNull: false },
+  name: { type: Sequelize.STRING, allowNull: false },
+  school: { type: Sequelize.STRING, allowNull: false }
 });
 
-var Organizations = orm.define('organizations', {
+var Schools = orm.define('schools', {
   name: { type: Sequelize.STRING, allowNull: false }
 });
 
